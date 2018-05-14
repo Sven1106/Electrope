@@ -9,9 +9,8 @@
 
 .game-list {
 	//border: 1px solid #333;
-	text-align: center;
 	margin: 20px auto;
-	width: 1020px;
+	max-width: 1020px;
 	/* centered */
 	&:after {
 		display: block;

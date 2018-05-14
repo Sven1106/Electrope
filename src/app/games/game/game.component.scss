@@ -60,6 +60,7 @@ $white: #ffffff;
                 --fontSize: 16px;
                 --buttonWidth: 100px;
 
+                box-sizing: border-box; // Needed for correct progress__bar width
                 font-size: var(--fontSize);
                 font-weight: 700;
                 line-height: var(--fontSize);
