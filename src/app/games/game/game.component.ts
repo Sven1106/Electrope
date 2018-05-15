@@ -15,8 +15,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   isDownloading: Boolean = false;
   isCompleted: Boolean = false;
   percentage: Number = 0;
-  myStyles = { '--sPercentage': '"' + this.percentage + '%"', '--iPercentage': + this.percentage + ''};
-
+  i = 1; //  set your counter to 1
   constructor() { }
 
   ngOnInit() {
@@ -25,6 +24,20 @@ export class GameComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
  }
+
+onClick(event: MouseEvent, game: IGame) {
+
+  if (this.isReady) {
+    console.log('isReady: ' + this.isReady);
+    this.getGame(event, game);
+  } else {
+    console.log('isCompleted: ' + this.isCompleted);
+    if (this.isCompleted) {
+      this.installGame(event, game);
+    }
+  }
+
+}
 
  getGame(event: MouseEvent, game: IGame) {
    const $this = event.currentTarget;
@@ -35,32 +48,31 @@ export class GameComponent implements OnInit, AfterViewInit {
     $($this).find('.progress-wrapper').addClass('active').clearQueue();
 
 
-    let i = 1; //  set your counter to 1
-    function myLoop() {
-      //  create a loop function
-      setTimeout(function () {
-        //  call a 3s setTimeout when the loop is called
-        if (i <= 100) {
-          i++; //  increment the counter
-          $($this).find('.progress-wrapper').css({
-            '--sPercentage': '"' + i + '%"',
-            '--iPercentage': i + ''
-          });
-          //  if the counter < 10, call the loop function
-          myLoop(); //  ..  again which will trigger another
-        } else {
 
-          $($this).addClass('finished').clearQueue();
-          $($this).removeClass('active');
-          $($this).find('.progress__text').addClass('completed').clearQueue();
-          this.isCompleted = true;
-          console.log(this.isCompleted );
-        }
-      }, 30);
-    }
-    myLoop();
+
+    this.myLoop($this);
   }
+  myLoop (target) {
+    //  create a loop function
 
+      //  call a 3s setTimeout when the loop is called
+      if (this.i <= 100) {
+        this.i++; //  increment the counter
+        $(target).find('.progress-wrapper').css({
+          '--sPercentage': '"' + this.i + '%"',
+          '--iPercentage': this.i + ''
+        });
+
+        this.myLoop(target);
+      } else {
+
+        $(target).addClass('finished').clearQueue();
+        $(target).removeClass('active');
+        $(target).find('.progress__text').addClass('completed').clearQueue();
+        this.isCompleted = true;
+      }
+
+  }
   installGame(event: MouseEvent, game: IGame) {
      console.log('installing ' + game.title);
     // alert(`You have started installing ${game.title}`);

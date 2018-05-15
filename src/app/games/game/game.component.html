@@ -7,7 +7,7 @@
     </span>
     <div class="game-card--hovered">
         <div class="game-card-center-button">
-            <div class="download-btn" (click)="isReady ? getGame($event, game) : isCompleted ? installGame($event, game) : null" >
+            <div class="download-btn" (click)="onClick($event, game)" >
                 <div class="download">Download</div>
                 <div class="progress-wrapper" style="--sPercentage: '0%'; --iPercentage: 0;">
                     <div class="progress__bar">
