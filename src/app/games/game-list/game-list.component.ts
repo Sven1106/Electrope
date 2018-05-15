@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GameService } from '../shared/game.service';
-import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+
 import { IGame } from '../shared/game';
 
 @Component({
@@ -27,7 +27,7 @@ export class GameListComponent implements OnInit, AfterViewInit {
     this.filteredGames = this.listFilter ? this.performFilter(this.listFilter) : this.games;
   }
 
-  constructor(_gameService: GameService, private elementRef: ElementRef) {
+  constructor(_gameService: GameService ) {
     this.games = _gameService.getGames();
     this.filteredGames = this.games;
     this.listFilter = '';

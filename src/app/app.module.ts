@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { GameListComponent } from './games/game-list/game-list.component';
 import { GameComponent } from './games/game/game.component';
+import { GameListComponent } from './games/game-list/game-list.component';
 
 
 @NgModule({

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { IGame } from '../shared/game';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-game',
@@ -25,13 +24,11 @@ export class GameComponent implements OnInit, AfterViewInit {
 
  }
 
-onClick(event: MouseEvent, game: IGame) {
+getGame(event: MouseEvent, game: IGame) {
 
   if (this.isReady) {
-    console.log('isReady: ' + this.isReady);
-    this.getGame(event, game);
+    this.downloadGame(event, game);
   } else {
-    console.log('isCompleted: ' + this.isCompleted);
     if (this.isCompleted) {
       this.installGame(event, game);
     }
@@ -39,19 +36,17 @@ onClick(event: MouseEvent, game: IGame) {
 
 }
 
- getGame(event: MouseEvent, game: IGame) {
+ downloadGame(event: MouseEvent, game: IGame) {
    const $this = event.currentTarget;
    this.isReady = false;
-   console.log('downloading ' + game.title);
+   console.log('Downloading ' + game.title);
     $($this).addClass('active');
     $($this).closest('.game-card').addClass('game-card--active');
     $($this).find('.progress-wrapper').addClass('active').clearQueue();
-
-
-
-
     this.myLoop($this);
   }
+
+
   myLoop (target) {
     //  create a loop function
 
@@ -74,7 +69,7 @@ onClick(event: MouseEvent, game: IGame) {
 
   }
   installGame(event: MouseEvent, game: IGame) {
-     console.log('installing ' + game.title);
+     console.log('Installing ' + game.title);
     // alert(`You have started installing ${game.title}`);
   }
 }
